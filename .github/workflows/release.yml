@@ -39,7 +39,7 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Set package version
-        run: cd packages/${{ steps.parse.outputs.package }} && npm --no-git-tag-version version ${{ steps.parse.outputs.version }}
+        run: cd packages/${{ steps.parse.outputs.package }} && npm pkg set version=${{ steps.parse.outputs.version }}
 
       - name: Build
         run: pnpm build

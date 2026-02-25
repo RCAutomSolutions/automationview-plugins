@@ -13,6 +13,11 @@ Festo equipment catalog plugin for [AutomationView](https://marketplace.visualst
 
 - [AutomationView](https://marketplace.visualstudio.com/items?itemName=RCAutomSolutions.automationview) extension must be installed
 
+## Disclaimer
+
+This extension is **not affiliated with, endorsed by, or sponsored by** Festo SE & Co. KG.
+Festo is a registered trademark of Festo SE & Co. KG. The authors assume **no responsibility** for any issues arising from the use of this extension.
+
 ## License
 
 MIT - Copyright (c) RCAutomSolutions. See [LICENSE](./LICENSE) for details.
