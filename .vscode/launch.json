@@ -1,0 +1,21 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Run CODESYS Extension",
+            "type": "extensionHost",
+            "request": "launch",
+            "args": ["--extensionDevelopmentPath=${workspaceFolder}/packages/codesys"],
+            "outFiles": ["${workspaceFolder}/packages/codesys/dist/**/*.js"],
+            "preLaunchTask": "npm: build - automationview-codesys"
+        },
+        {
+            "name": "Run Festo Extension",
+            "type": "extensionHost",
+            "request": "launch",
+            "args": ["--extensionDevelopmentPath=${workspaceFolder}/packages/festo"],
+            "outFiles": ["${workspaceFolder}/packages/festo/dist/**/*.js"],
+            "preLaunchTask": "npm: build - automationview-festo"
+        }
+    ]
+}

@@ -1,0 +1,59 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "*-v*"
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Parse tag
+        id: parse
+        env:
+          TAG: ${{ github.ref_name }}
+        run: |
+          PACKAGE="${TAG%-v*}"
+          VERSION="${TAG#*-v}"
+          echo "package=$PACKAGE" >> $GITHUB_OUTPUT
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Set package version
+        run: cd packages/${{ steps.parse.outputs.package }} && npm --no-git-tag-version version ${{ steps.parse.outputs.version }}
+
+      - name: Build
+        run: pnpm build
+
+      - name: Package VSIX
+        run: cd packages/${{ steps.parse.outputs.package }} && npx @vscode/vsce package --no-dependencies
+
+      - name: Upload VSIX artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ steps.parse.outputs.package }}-${{ steps.parse.outputs.version }}.vsix
+          path: packages/${{ steps.parse.outputs.package }}/*.vsix
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: packages/${{ steps.parse.outputs.package }}/*.vsix

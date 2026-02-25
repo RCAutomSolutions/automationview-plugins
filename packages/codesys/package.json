@@ -1,0 +1,54 @@
+{
+  "name": "automationview-codesys",
+  "displayName": "AutomationView - CODESYS",
+  "description": "CODESYS V3 export provider for AutomationView",
+  "publisher": "RCAutomSolutions",
+  "version": "1.0.0",
+  "license": "MIT",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "main": "./dist/extension.js",
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "extensionDependencies": [
+    "rcautomsolutions.automationview"
+  ],
+  "extensionKind": [
+    "workspace"
+  ],
+  "capabilities": {
+    "virtualWorkspaces": false,
+    "untrustedWorkspaces": {
+      "supported": false
+    }
+  },
+  "contributes": {},
+  "categories": [
+    "Other"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/RCAutomSolutions/automationview-plugins",
+    "directory": "packages/codesys"
+  },
+  "scripts": {
+    "vscode:prepublish": "node esbuild.config.mjs --minify",
+    "build": "node esbuild.config.mjs",
+    "watch": "node esbuild.config.mjs --watch",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit && tsc --noEmit -p tsconfig.test.json",
+    "lint": "eslint src tests",
+    "clean": "rm -rf dist *.vsix .turbo",
+    "package": "npx @vscode/vsce package --no-dependencies"
+  },
+  "dependencies": {
+    "@automationview/api": "^1.0.1"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.85.0",
+    "vite": "^6",
+    "vitest": "^3.2.4"
+  }
+}

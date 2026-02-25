@@ -1,0 +1,28 @@
+{
+  "name": "automationview-plugins",
+  "private": true,
+  "license": "MIT",
+  "version": "0.0.0",
+  "packageManager": "pnpm@9.0.0",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "scripts": {
+    "build": "turbo run build",
+    "test": "turbo run test",
+    "typecheck": "turbo run typecheck",
+    "lint": "turbo run lint",
+    "clean": "turbo run clean",
+    "package": "turbo run package",
+    "package:codesys": "pnpm --filter automationview-codesys package",
+    "package:festo": "pnpm --filter automationview-festo package"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "esbuild": "^0.24.0",
+    "eslint": "^10.0.2",
+    "turbo": "^2.4.0",
+    "typescript": "^5.7.2",
+    "typescript-eslint": "^8.56.1"
+  }
+}
